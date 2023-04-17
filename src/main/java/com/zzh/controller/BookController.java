@@ -52,7 +52,14 @@ public class BookController {
      */
     @GetMapping("{currentPage}/{pageSize}")
     public R getPage(@PathVariable int currentPage,@PathVariable int pageSize){
-        return new R(true,iBookService.getPage(currentPage,pageSize));
+        //问题：当前页码大于总的页码，
+        //使用最大页码当做当前页码进行重新查询
+        IPage<Book> page = iBookService.getPage(currentPage, pageSize);
+        if(currentPage> page.getPages()){
+            page = iBookService.getPage((int) page.getPages(), pageSize);
+        }
+
+        return new R(true,page);
     }
 
     /**
