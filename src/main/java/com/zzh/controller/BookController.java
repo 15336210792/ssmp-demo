@@ -63,7 +63,8 @@ public class BookController {
      */
     @PostMapping
     public R save(@RequestBody Book book) {
-        return new R(iBookService.save(book));
+        boolean flag = iBookService.save(book);
+        return new R(flag,flag?"保存成功":"保存失败");
     }
 
     /**
@@ -74,7 +75,8 @@ public class BookController {
      */
     @PutMapping
     public R update(@RequestBody Book book) {
-        return new R(iBookService.update(book));
+        boolean flag = iBookService.update(book);
+        return new R(flag,flag?"修改成功":"修改成功");
     }
 
     /**
@@ -85,7 +87,8 @@ public class BookController {
      */
     @DeleteMapping("/{id}")
     public R deleteById(@PathVariable Integer id){
-        return new R(iBookService.delete(id));
+        boolean flag = iBookService.delete(id);
+        return new R(flag,flag?"删除成功":"删除失败");
     }
 
 }
