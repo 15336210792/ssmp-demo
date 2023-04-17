@@ -6,19 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class BookServicetest {
+public class testIBookService {
 
     @Autowired
-    private IBookService bookService;
-/*
+    private IBookService iBookService;
+
     @Test
-    void testGetById(){
-        System.out.println( bookService.getById(1));
+    void selectById(){
+        System.out.println(iBookService.getById(1));
     }
-
-    @Test
-    void testGetAll(){
-        System.out.println( bookService.getAll());
-    }*/
-
 }
