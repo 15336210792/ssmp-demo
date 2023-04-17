@@ -1,6 +1,7 @@
 package com.zzh.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.zzh.controller.util.R;
 import com.zzh.domain.Book;
 import com.zzh.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class BookController {
      * @return {@link List}<{@link Book}>
      */
     @GetMapping
-    public List<Book> getAll() {
-        return iBookService.list();
+    public R getAll() {
+        return new R(true,iBookService.list());
     }
 
     /**
@@ -38,8 +39,8 @@ public class BookController {
      * @return {@link Book}
      */
     @GetMapping("/{id}")
-    public Book getById(@PathVariable Integer id){
-        return iBookService.getById(id);
+    public R getById(@PathVariable Integer id){
+        return new R(true,iBookService.getById(id));
     }
 
     /**
@@ -50,8 +51,8 @@ public class BookController {
      * @return {@link IPage}<{@link Book}>
      */
     @GetMapping("{currentPage}/{pageSize}")
-    public IPage<Book> getPage(@PathVariable int currentPage,@PathVariable int pageSize){
-        return iBookService.getPage(currentPage,pageSize);
+    public R getPage(@PathVariable int currentPage,@PathVariable int pageSize){
+        return new R(true,iBookService.getPage(currentPage,pageSize));
     }
 
     /**
@@ -61,8 +62,8 @@ public class BookController {
      * @return boolean
      */
     @PostMapping
-    public boolean save(@RequestBody Book book) {
-        return iBookService.save(book);
+    public R save(@RequestBody Book book) {
+        return new R(iBookService.save(book));
     }
 
     /**
@@ -72,8 +73,8 @@ public class BookController {
      * @return boolean
      */
     @PutMapping
-    public boolean update(@RequestBody Book book) {
-        return iBookService.update(book);
+    public R update(@RequestBody Book book) {
+        return new R(iBookService.update(book));
     }
 
     /**
@@ -83,8 +84,8 @@ public class BookController {
      * @return boolean
      */
     @DeleteMapping("/{id}")
-    public boolean deleteById(@PathVariable Integer id){
-        return iBookService.delete(id);
+    public R deleteById(@PathVariable Integer id){
+        return new R(iBookService.delete(id));
     }
 
 }
