@@ -51,12 +51,12 @@ public class BookController {
      * @return {@link IPage}<{@link Book}>
      */
     @GetMapping("{currentPage}/{pageSize}")
-    public R getPage(@PathVariable int currentPage,@PathVariable int pageSize){
+    public R getPage(@PathVariable int currentPage,@PathVariable int pageSize,Book book){
         //问题：当前页码大于总的页码，
         //使用最大页码当做当前页码进行重新查询
-        IPage<Book> page = iBookService.getPage(currentPage, pageSize);
+        IPage<Book> page = iBookService.getPage(currentPage, pageSize,book);
         if(currentPage> page.getPages()){
-            page = iBookService.getPage((int) page.getPages(), pageSize);
+            page = iBookService.getPage((int) page.getPages(), pageSize,book);
         }
 
         return new R(true,page);
